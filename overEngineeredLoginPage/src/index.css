@@ -6,3 +6,8 @@
   background-image: url('/images/background.png');
   background-size: cover;
 }
+
+.bg-custom-board-background {
+  background-image: url('/images/boardBackground.png');
+  background-size: cover;
+}
