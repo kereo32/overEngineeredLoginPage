@@ -29,7 +29,6 @@ export default function Navbar() {
     button.classList.add('opacity-100');
   };
   const handleMouseEnter = () => {
-    console.log('xd');
     setIsMouseOver(true);
   };
   const handleMouseLeave = () => {

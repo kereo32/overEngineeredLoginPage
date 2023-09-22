@@ -5,7 +5,7 @@ import Signup from './Components/Signup';
 function App() {
   console.log(Routes);
   return (
-    <div className="min-h-screen bg-custom-background">
+    <div className="min-h-screen min-w-screen bg-custom-background">
       <Navbar />
       <Routes>
         <Route path="/" />

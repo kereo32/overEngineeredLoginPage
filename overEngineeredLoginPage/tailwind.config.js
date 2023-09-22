@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         garamond: ['EB Garamond', 'serif'],
       },
+      backgroundColor: {
+        button: '#1A535C',
+      },
     },
   },
   plugins: [],
