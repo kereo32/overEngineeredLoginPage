@@ -1,4 +1,6 @@
 import { Field, Form, Formik } from 'formik';
+import { Link } from 'react-router-dom';
+
 export default function RegisterForm() {
   return (
     <div className="flex flex-col flex-nowrap w-full h-full justify-center items-center">
@@ -34,7 +36,9 @@ export default function RegisterForm() {
       </div>
       <div className="flex flex-col flex-nowrap justify-center items-center mt-6">
         <h1 className="font-garamond text-white text-md opacity-70">Already a member ?</h1>
-        <h1 className="font-garamond text-cyan-800 text-md opacity-60">Sign in!</h1>
+        <Link to={'/login'}>
+          <h1 className="font-garamond text-cyan-800 text-md opacity-60">Sign in!</h1>
+        </Link>
       </div>
     </div>
   );

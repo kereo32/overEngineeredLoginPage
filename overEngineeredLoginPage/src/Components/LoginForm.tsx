@@ -1,4 +1,5 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
   return (
@@ -23,7 +24,7 @@ export default function LoginForm() {
             }}
           >
             <Form className="grid grid-cols-1 gap-4">
-              <Field className="border-2 rounded-md" placeholder="Enter your email" name="email" type="email" />
+              <Field className=" border-2 rounded-md" placeholder="Enter your email" name="email" type="email" />
               <Field className="border-2 rounded-md" placeholder="Enter your password" name="password" type="password" />
               <button className="border-2 rounded h-10 bg-button font-garamond text-white" type="submit">
                 SIGN IN!
@@ -34,7 +35,9 @@ export default function LoginForm() {
       </div>
       <div className="flex flex-col flex-nowrap justify-center items-center mt-6">
         <h1 className="font-garamond text-white text-md opacity-70">Don't you have an account ?</h1>
-        <h1 className="font-garamond text-cyan-800 text-md opacity-60">Create an account</h1>
+        <Link to={'/signup'}>
+          <h1 className="font-garamond text-cyan-800 text-md opacity-60">Create an account</h1>
+        </Link>
       </div>
     </div>
   );
