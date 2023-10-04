@@ -1,5 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import { get, post } from '../helpers/helper';
 
 export default function LoginForm() {
   return (
@@ -17,10 +18,11 @@ export default function LoginForm() {
         </div>
         <div className="flex flex-col flex-nowrap items-center justify-center col-span-6 row-span-5">
           <Formik
-            initialValues={{ name: '', email: '' }}
+            initialValues={{ email: '', password: '' }}
             onSubmit={async (values) => {
-              await new Promise((resolve) => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              post('http://localhost:8080/auth/login', values).then((res) => {
+                console.log(res.username);
+              });
             }}
           >
             <Form className="grid grid-cols-1 gap-4">

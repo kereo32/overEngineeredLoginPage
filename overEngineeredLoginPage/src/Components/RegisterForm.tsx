@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { post } from '../helpers/helper';
 
 export default function RegisterForm() {
   return (
@@ -17,14 +18,15 @@ export default function RegisterForm() {
         </div>
         <div className="flex flex-col flex-nowrap items-center justify-center col-span-6 row-span-5">
           <Formik
-            initialValues={{ name: '', email: '' }}
+            initialValues={{ username: '', email: '', password: '' }}
             onSubmit={async (values) => {
-              await new Promise((resolve) => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              post('http://localhost:8080/auth/register', values).then((res) => {
+                console.log(res);
+              });
             }}
           >
             <Form className="grid grid-cols-1 gap-4">
-              <Field className="border-2 rounded-md" placeholder="Enter your name" name="name" type="name" />
+              <Field className="border-2 rounded-md" placeholder="Enter your name" name="username" type="username" />
               <Field className="border-2 rounded-md" placeholder="Enter your email" name="email" type="email" />
               <Field className="border-2 rounded-md" placeholder="Enter your password" name="password" type="password" />
               <button className="border-2 rounded h-10 bg-button font-garamond text-white" type="submit">
