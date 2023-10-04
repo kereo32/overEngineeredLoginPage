@@ -1,22 +1,30 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../store/user';
 
 interface UserState {
   isAuthenticated: boolean;
-  userInformation: {
-    username: string;
-    email: string;
-  } | null;
+  user: {
+    userInformation: {
+      username: string;
+      email: string;
+    } | null;
+  };
 }
 
 export default function Navbar() {
   const [pressedButton, setPressedButton] = useState<HTMLButtonElement | null>(null);
-  const username = useSelector((state: UserState) => state.userInformation?.username);
+  const username = useSelector((state: UserState) => state.user.userInformation?.username);
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement;
+
+    if (button.innerText === 'Logout') {
+      localStorage.removeItem('sessionToken');
+      window.location.reload();
+    }
 
     if (pressedButton) {
       pressedButton.classList.remove('opacity-100');
@@ -42,16 +50,26 @@ export default function Navbar() {
       >
         <div className="flex flex-nowrap flex-row items-center justify-end">
           <div className="grid grid-cols-2 gap-0">
-            <Link to="/login">
-              <button onClick={handleButtonClick} className={`font-garamond text-xl text-white opacity-100 hover:opacity-100`}>
-                Login
-              </button>
-            </Link>
-            <Link to="/signup">
-              <button onClick={handleButtonClick} className={`font-garamond text-xl text-white opacity-100 hover:opacity-100`}>
-                Sign Up!
-              </button>
-            </Link>
+            {username ? (
+              <>
+                <button onClick={handleButtonClick} className={`font-garamond text-xl text-white opacity-100 hover:opacity-100`}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button onClick={handleButtonClick} className={`font-garamond text-xl text-white opacity-100 hover:opacity-100`}>
+                    Login
+                  </button>
+                </Link>
+                <Link to="/signup">
+                  <button onClick={handleButtonClick} className={`font-garamond text-xl text-white opacity-100 hover:opacity-100`}>
+                    Sign Up!
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
         <div className="flex items-center justify-start">

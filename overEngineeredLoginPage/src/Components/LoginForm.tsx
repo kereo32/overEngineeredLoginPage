@@ -1,8 +1,12 @@
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import { get, post } from '../helpers/helper';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../store/user';
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col flex-nowrap w-full h-full justify-center items-center">
       <div className="grid grid-rows-6 bg-white h-[60%] w-[70%] rounded shadow-md">
@@ -21,7 +25,13 @@ export default function LoginForm() {
             initialValues={{ email: '', password: '' }}
             onSubmit={async (values) => {
               post('http://localhost:8080/auth/login', values).then((res) => {
-                console.log(res.username);
+                const userData: { username: string; email: string } = {
+                  username: res.username,
+                  email: res.email,
+                };
+                console.log(res.authentication.sessionToken);
+                localStorage.setItem('sessionToken', res.authentication.sessionToken);
+                dispatch(loginSuccess(userData));
               });
             }}
           >

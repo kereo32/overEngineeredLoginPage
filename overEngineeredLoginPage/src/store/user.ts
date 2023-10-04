@@ -20,13 +20,18 @@ const userSlice = createSlice({
     loginSuccess(state: UserState, action: PayloadAction<UserState['userInformation']>) {
       state.isAuthenticated = true;
       state.userInformation = action.payload;
+      console.log(state.userInformation);
     },
     logout(state: UserState) {
       state.isAuthenticated = false;
       state.userInformation = null;
     },
+    checkSessionSuccess(state: UserState, action: PayloadAction<UserState['userInformation']>) {
+      state.isAuthenticated = true;
+      state.userInformation = action.payload;
+    },
   },
 });
 
-export const { loginSuccess, logout } = userSlice.actions;
+export const { loginSuccess, logout, checkSessionSuccess } = userSlice.actions;
 export default userSlice.reducer;
