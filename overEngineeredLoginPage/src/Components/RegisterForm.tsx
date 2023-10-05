@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { post } from '../helpers/helper';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/user';
+import Cookies from 'js-cookie';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -29,8 +30,7 @@ export default function RegisterForm() {
                     username: res.username,
                     email: res.email,
                   };
-                  console.log(res.authentication.sessionToken);
-                  localStorage.setItem('sessionToken', res.authentication.sessionToken);
+                  Cookies.set('sessionToken', res.authentication.sessionToken, { sameSite: 'strict', expires: 1 });
                   dispatch(loginSuccess(userData));
                 });
               });
