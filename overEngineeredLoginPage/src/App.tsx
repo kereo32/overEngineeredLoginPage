@@ -17,7 +17,7 @@ function App() {
     const sessionToken = localStorage.getItem('sessionToken');
 
     if (sessionToken) {
-      const user = post('http://localhost:8080/auth/findUserBySessionId', { sessionToken: sessionToken })
+      post('http://localhost:8080/auth/findUserBySessionId', { sessionToken: sessionToken })
         .then((res) => {
           console.log(res);
           dispatch(checkSessionSuccess(res));
