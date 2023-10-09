@@ -5,6 +5,9 @@ import Signup from './Components/Signup';
 import Home from './Components/Home';
 import Cookies from 'js-cookie';
 
+import ProtectedRoute from './helpers/ProtectedRoute';
+import Profile from './Components/Profile';
+
 import { post } from './helpers/helper';
 
 import { useEffect } from 'react';
@@ -17,9 +20,8 @@ function App() {
   useEffect(() => {
     const sessionToken = Cookies.get('sessionToken');
     if (sessionToken) {
-      post('http://localhost:8080/auth/findUserBySessionId', { sessionToken })
+      post('https://oel-api-c91f06239a18.herokuapp.com/auth/findUserBySessionId', { sessionToken })
         .then((res) => {
-          console.log(res);
           dispatch(checkSessionSuccess(res));
         })
         .catch(() => {
@@ -35,6 +37,14 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/login" Component={Login} />
         <Route path="/signup" Component={Signup} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
