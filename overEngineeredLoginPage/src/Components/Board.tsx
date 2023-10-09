@@ -14,13 +14,13 @@ export default function Board(props: BoardProps) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="grid grid-cols-4 w-full min-h-[500px]">
-        <div className="relative col-span-2 ">
+      <div className="grid grid-cols-1 md:grid-cols-4 w-full min-h-[500px]">
+        <div className="relative col-span-1 md:col-span-2">
           <div className="flex flex-row flex-nowrap justify-start items-center w-full h-full">
             <img src="/images/door.png" alt="Image Description" />
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <div className="flex flex-col flex-nowrap w-full h-full justify-center items-center">
             {props.callType === 'login' ? <LoginForm /> : <RegisterForm />}
           </div>

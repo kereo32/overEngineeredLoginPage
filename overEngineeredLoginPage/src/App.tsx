@@ -3,6 +3,10 @@ import { Route, Routes } from 'react-router';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Home from './Components/Home';
+import Cookies from 'js-cookie';
+
+import ProtectedRoute from './helpers/ProtectedRoute';
+import Profile from './Components/Profile';
 
 import { post } from './helpers/helper';
 
@@ -14,20 +18,18 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const sessionToken = localStorage.getItem('sessionToken');
-
+    const sessionToken = Cookies.get('sessionToken');
     if (sessionToken) {
-      post('http://localhost:8080/auth/findUserBySessionId', { sessionToken: sessionToken })
+      post('https://oel-api-c91f06239a18.herokuapp.com/auth/findUserBySessionId', { sessionToken })
         .then((res) => {
-          console.log(res);
           dispatch(checkSessionSuccess(res));
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           dispatch(logout());
         });
     }
   }, [dispatch]);
+
   return (
     <div className="min-h-screen min-w-screen bg-custom-background">
       <Navbar />
@@ -35,6 +37,14 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/login" Component={Login} />
         <Route path="/signup" Component={Signup} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

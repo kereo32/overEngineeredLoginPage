@@ -20,7 +20,6 @@ const userSlice = createSlice({
     loginSuccess(state: UserState, action: PayloadAction<UserState['userInformation']>) {
       state.isAuthenticated = true;
       state.userInformation = action.payload;
-      console.log(state.userInformation);
     },
     logout(state: UserState) {
       state.isAuthenticated = false;
