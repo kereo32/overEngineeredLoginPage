@@ -14,6 +14,9 @@ import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { checkSessionSuccess, logout } from './store/user';
+
+import './index.css';
+
 function App() {
   const dispatch = useDispatch();
 

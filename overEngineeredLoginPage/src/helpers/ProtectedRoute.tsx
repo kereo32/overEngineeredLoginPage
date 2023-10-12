@@ -1,10 +1,25 @@
 import { useSelector } from 'react-redux';
-import { useLocation, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useState, useEffect, ReactNode } from 'react';
 
-const ProtectedRoute = ({ children }) => {
-  const user = useSelector((state) => state.user);
-  const location = useLocation();
+type UserState = {
+  user: {
+    isAuthenticated: boolean;
+    user: {
+      userInformation: {
+        username: string;
+        email: string;
+      } | null;
+    };
+  };
+};
+
+type ProtectedRouteProps = {
+  children: ReactNode;
+};
+
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+  const user = useSelector((state: UserState) => state.user);
   const [timeoutExpired, setTimeoutExpired] = useState(false);
 
   useEffect(() => {

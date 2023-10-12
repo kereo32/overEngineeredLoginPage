@@ -2,6 +2,8 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import { motion } from 'framer-motion';
 
+import doorImage from '../../public/images/door.png';
+
 type BoardProps = {
   callType: 'login' | 'register' | 'forgotPassword';
 };
@@ -17,7 +19,7 @@ export default function Board(props: BoardProps) {
       <div className="grid grid-cols-1 md:grid-cols-4 w-full min-h-[500px]">
         <div className="relative col-span-1 md:col-span-2">
           <div className="flex flex-row flex-nowrap justify-start items-center w-full h-full">
-            <img src="/images/door.png" alt="Image Description" />
+            <img src={doorImage} alt="Image Description" />
           </div>
         </div>
         <div className="col-span-1 md:col-span-2">

@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import { get, post } from '../helpers/helper';
+import { post } from '../helpers/helper';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/user';
 import Cookies from 'js-cookie';
